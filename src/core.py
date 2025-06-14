@@ -1,7 +1,10 @@
-from src.models import percolation
+from src.models import percolation, ising  
 
 def run_simulation(config):
-    if config['model'] == 'percolation':
+    model = config['model']
+    if model == 'percolation':
         percolation.run(config)
+    elif model == 'ising':  
+        ising.run(config)
     else:
-        raise ValueError(f"Unknown model: {config['model']}")
+        raise ValueError(f"Unknown model: {model}")

@@ -1,5 +1,6 @@
-model: percolation
+model: ising
 steps: 10000
-lattice_size: 100
-seed: 63
+lattice_size: 50
+temperature: 2.3
+seed: 42
 output_dir: data/outputs/
