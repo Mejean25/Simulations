@@ -1,6 +1,9 @@
 model: ising
-steps: 10000
+steps: 1000
 lattice_size: 50
-temperature: 2.3
 seed: 42
 output_dir: data/outputs/
+algorithm: wolff
+T_min: 1.0
+T_max: 4.0
+num_temps: 16
