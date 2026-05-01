@@ -1,5 +1,5 @@
 model: ising
-steps: 1000
+steps: 5000
 lattice_size: 50
 seed: 42
 output_dir: data/outputs/
