@@ -29,3 +29,12 @@ Results are saved as PNG images in `data/outputs/` which is ignored by git.
 - `config/` - YAML configuration for `run.py`
 - `Reinforcement Learning/` - RL visualization notebooks, scripts, and notes
 - `Probabilistic Robotics/` - robotics visualization notebooks, scripts, and notes
+
+## The Cat’s Dream
+
+Run `python3 dreaming_cat.py` to watch the thirteen mice puzzle as a desktop
+animation. Mouse 8 is white and is eaten last. Use Play/Pause, Next eaten,
+Reset, and the speed slider to explore the counting sequence.
+
+Requires Python 3.7+ with Tkinter. Use `--autoplay` to start immediately or
+`--sequence` for text output. See [DREAMING_CAT.md](DREAMING_CAT.md) for details.
