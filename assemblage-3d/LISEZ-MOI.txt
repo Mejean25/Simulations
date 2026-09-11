@@ -8,6 +8,13 @@ Aucun paquet pip, accès Internet ou fichier PDF n'est nécessaire au lancement.
 Si Tkinter manque : installer Python avec Tk depuis python.org ; sous Debian/
 Ubuntu, installer le paquet python3-tk.
 
+Fenêtre blanche sur macOS
+Le Python Apple peut utiliser Tk 8.5 et afficher une fenêtre entièrement blanche.
+Le programme recherche désormais automatiquement un Python déjà installé avec
+Tk 8.6 ou plus récent (python.org, Homebrew ou uv), puis se relance avec lui.
+Cela ne modifie pas votre Python par défaut et n'installe aucun logiciel.
+Si aucun Python compatible n'est trouvé, un message explique quoi installer.
+
 Utilisation
 • Assembler / Éclater : animation dans le sens choisi.
 • Curseur : passage direct à toute position intermédiaire.

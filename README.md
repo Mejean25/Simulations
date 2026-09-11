@@ -48,6 +48,9 @@ bars, and eleven white cubes. Hidden parts are a reconstruction consistent
 with the three visible faces in the original drawing.
 
 Requires Python 3.9+ with Tkinter; no additional Python packages are needed.
+On macOS, the launcher automatically selects an installed Python with Tk 8.6+
+when Apple's Tk 8.5 would produce a blank window. It does not change the system
+Python or install software.
 Run `python3 assemblage-3d/assemblage_3d.py --verifier` to check the geometry.
 See [the French user guide](assemblage-3d/LISEZ-MOI.txt) for controls.
 

@@ -9,7 +9,65 @@ Les faces cachées constituent une reconstruction compatible avec le dessin.
 import argparse
 from dataclasses import dataclass
 import math
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
 import time
+
+
+def python_avec_tk_recent():
+    """Trouver un Python déjà installé, sans installer ni modifier le système."""
+    candidats = [shutil.which('python3')]
+    for dossier, motif in [
+        (Path('/opt/homebrew/bin'), 'python3*'),
+        (Path('/usr/local/bin'), 'python3*'),
+        (Path('/Library/Frameworks/Python.framework/Versions'), '*/bin/python3'),
+        (Path.home() / '.local/share/uv/python', '*/bin/python3'),
+    ]:
+        candidats.extend(sorted(dossier.glob(motif), reverse=True))
+    vus = {Path(sys.executable).resolve()}
+    sonde = ('import sys, tkinter; '
+             'sys.exit(0 if sys.version_info >= (3, 9) and '
+             'tkinter.TkVersion >= 8.6 else 1)')
+    for candidat in candidats:
+        if not candidat:
+            continue
+        chemin = Path(candidat).resolve()
+        if chemin in vus or not chemin.is_file() or not os.access(chemin, os.X_OK):
+            continue
+        vus.add(chemin)
+        try:
+            resultat = subprocess.run([str(chemin), '-c', sonde],
+                                      stdout=subprocess.DEVNULL,
+                                      stderr=subprocess.DEVNULL, timeout=5)
+        except (OSError, subprocess.TimeoutExpired):
+            continue
+        if resultat.returncode == 0:
+            return str(chemin)
+    return None
+
+
+def preparer_interface():
+    """Éviter la fenêtre blanche du Tk 8.5 livré avec Python Apple."""
+    try:
+        import tkinter
+        compatible = sys.platform != 'darwin' or tkinter.TkVersion >= 8.6
+    except ImportError:
+        compatible = False
+    if compatible:
+        return
+    if sys.platform == 'darwin':
+        executable = python_avec_tk_recent()
+        if executable:
+            print('Interface graphique : utilisation de ' + executable, flush=True)
+            os.execv(executable, [executable, str(Path(__file__).resolve()), *sys.argv[1:]])
+    raise RuntimeError(
+        'Cette interface nécessite Tkinter (Tk 8.6 ou plus récent sur macOS).\n'
+        'Le Tk 8.5 de Python Apple peut afficher une fenêtre blanche.\n'
+        'Installez Python avec Tk depuis python.org, puis relancez ce programme\n'
+        'avec ce Python. Sous Debian/Ubuntu : installez python3-tk.')
 
 
 @dataclass(frozen=True)
@@ -249,9 +307,10 @@ def main():
         verifier()
         return
     try:
+        preparer_interface()
         app = Application()
-    except ImportError:
-        parser.exit(1, 'Tkinter manque. Installez Python avec Tk (python.org), ou python3-tk sous Linux.\n')
+    except (ImportError, RuntimeError) as erreur:
+        parser.exit(1, str(erreur) + '\n')
     app.root.mainloop()
 
 
