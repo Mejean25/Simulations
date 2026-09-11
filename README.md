@@ -38,3 +38,17 @@ Reset, and the speed slider to explore the counting sequence.
 
 Requires Python 3.7+ with Tkinter. Use `--autoplay` to start immediately or
 `--sequence` for text output. See [DREAMING_CAT.md](DREAMING_CAT.md) for details.
+
+## Cube assembly in 3D
+
+Run `python3 assemblage-3d/assemblage_3d.py` to explore the cube from
+Kangourou 2022, question 17. Rotate the view, animate assembly and disassembly,
+or separate all 27 unit cubes. The model contains two L-shaped pieces, two
+bars, and eleven white cubes. Hidden parts are a reconstruction consistent
+with the three visible faces in the original drawing.
+
+Requires Python 3.9+ with Tkinter; no additional Python packages are needed.
+Run `python3 assemblage-3d/assemblage_3d.py --verifier` to check the geometry.
+See [the French user guide](assemblage-3d/LISEZ-MOI.txt) for controls.
+
+![Assembled and exploded cube](assemblage-3d/apercu.png)

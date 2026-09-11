@@ -1,0 +1,36 @@
+ASSEMBLAGE 3D — KANGOUROU 2022, QUESTION 17
+
+Lancement
+  python3 assemblage_3d.py
+
+Python 3.9 ou plus récent avec Tkinter est nécessaire.
+Aucun paquet pip, accès Internet ou fichier PDF n'est nécessaire au lancement.
+Si Tkinter manque : installer Python avec Tk depuis python.org ; sous Debian/
+Ubuntu, installer le paquet python3-tk.
+
+Utilisation
+• Assembler / Éclater : animation dans le sens choisi.
+• Curseur : passage direct à toute position intermédiaire.
+• Pause ou touche Espace : suspendre / reprendre avec Espace.
+• Aller-retour : enchaîner démontage et remontage.
+• Glisser la souris sur le cube : tourner autour de l'objet.
+• Molette : zoomer ; Vue initiale : retrouver le point de vue du dessin.
+• Décomposer en 27 cubes : séparer chaque cellule, y compris celles des L
+  et des pavés. Décocher pour retrouver les véritables pièces du puzzle.
+• Repères des pièces : afficher leurs noms dans la vue éclatée.
+
+Modèle
+Le grand cube mesure 3 × 3 × 3 unités. Il est composé de deux L de cinq
+unités, deux pavés de trois unités et onze cubes blancs : 10 + 6 + 11 = 27.
+Les trois faces visibles correspondent à la figure de la question 17.
+Le dessin ne montre pas tout l'intérieur : les parties cachées sont une
+reconstruction compatible, et non un relevé certain du modèle original.
+Les pièces sont déplacées depuis le centre pour expliquer leur composition.
+L'animation ne simule ni la gravité ni les collisions ni un ordre de montage.
+Les contours quadrillent aussi les pièces longues pour rendre leur volume lisible.
+
+Vérification sans fenêtre
+  python3 assemblage_3d.py --verifier
+
+Le programme contrôle le remplissage des 27 cellules, l'absence de
+chevauchement, les volumes des pièces et les trois faces du dessin.
